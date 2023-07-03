@@ -1,0 +1,11 @@
+name: Testing Angular app
+on: push
+jobs:
+  runs-on: ubuntu-latest
+  steps:
+    - name: Get repo code
+      uses: actions/checkout@v3
+    - name: Install npm
+      run: npm ci
+    - name: App test
+      run: npm run test
