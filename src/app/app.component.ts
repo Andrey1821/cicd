@@ -9,8 +9,4 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'cicd';
   constructor(private router: Router) {}
-
-  private a(a: number, b: number): void {
-    console.log(1111);
-  }
 }
