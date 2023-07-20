@@ -9,8 +9,6 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'cicd';
 
-  private promise = new Promise(() => {});
-
   constructor(private router: Router) {
     this.example();
   }
