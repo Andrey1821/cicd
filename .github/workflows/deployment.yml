@@ -47,18 +47,23 @@ jobs:
         run: npm ci
       - name: Build app
         run: npm run build
-#
-#  deploy:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Get repo code
-#        uses: actions/checkout@v3
-#      - name: Install npm
-#        run: npm ci
-#      - name: Test app
-#        run: npm run test -- --watch=false --browsers=ChromeHeadless
-#      - name: Lint
-#        run: npm run lint
-#      - name: Build app
-#        run: npm run build
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{steps.deployment.outputs.page_url}}
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: dist
+          name: dist-files
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
 
