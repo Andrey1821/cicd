@@ -34,7 +34,7 @@ jobs:
           run: npm run lint
     build:
       runs-on: ubuntu-latest
-      needs: [test, lint]
+      needs: [test]
       steps:
         - name: Get repo code
           uses: actions/checkout@v3
