@@ -11,26 +11,40 @@ jobs:
     steps:
       - name: Get repo code
         uses: actions/checkout@v3
+      - name: Cache deps
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install npm
         run: npm ci
       - name: Test app
         run: npm run test -- --watch=false --browsers=ChromeHeadless
     lint:
       runs-on: ubuntu-latest
-      needs: test
       steps:
         - name: Get repo code
           uses: actions/checkout@v3
+        - name: Cache deps
+          uses: actions/cache@v3
+          with:
+            path: ~/.npm
+            key: node-modules-${{ hashFiles('**/package-lock.json') }}
         - name: Install npm
           run: npm ci
         - name: Lint
           run: npm run lint
     build:
       runs-on: ubuntu-latest
-      needs: lint
+      needs: [lint, test]
       steps:
         - name: Get repo code
           uses: actions/checkout@v3
+        - name: Cache deps
+          uses: actions/cache@v3
+          with:
+            path: ~/.npm
+            key: node-modules-${{ hashFiles('**/package-lock.json') }}
         - name: Install npm
           run: npm ci
         - name: Build app
