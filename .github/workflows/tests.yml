@@ -1,0 +1,50 @@
+name: Deploy Angular app
+on:
+  push:
+    branches:
+      - master
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get repo code
+        uses: actions/checkout@v3
+      - name: Cache deps
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: node-modules-${{ hashFiles('**/package-lock.json') }}
+      - name: Install npm
+        run: npm ci
+      - name: Test app
+        run: npm run test -- --watch=false --browsers=ChromeHeadless
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get repo code
+        uses: actions/checkout@v3
+      - name: Cache deps
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: node-modules-${{ hashFiles('**/package-lock.json') }}
+      - name: Install npm
+        run: npm ci
+      - name: Lint
+        run: npm run lint
+  build:
+    runs-on: ubuntu-latest
+    needs: [ test, lint ]
+    steps:
+      - name: Get repo code
+        uses: actions/checkout@v3
+      - name: Cache deps
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: node-modules-${{ hashFiles('**/package-lock.json') }}
+      - name: Install npm
+        run: npm ci
+      - name: Build app
+        run: npm run build
+
