@@ -1,54 +1,33 @@
 name: Build & Deploy
 on: workflow_dispatch
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 jobs:
   deploy:
+    environment:
+      name: github-pages
+      url: ${{steps.deployment.outputs.page_url}}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Install npm
         run: npm ci
-      - name: Create Release
-        uses: actions/create-release@v1
-        if: ${{ steps.changelog.outputs.skipped == 'false' }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB_ACTION }}
+      - name: Build app
+        run: npm run build
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@v2
         with:
-          tag_name: ${{ steps.changelog.outputs.tag }}
-          release_name: ${{ steps.changelog.outputs.tag }}
-          body: ${{ steps.changelog.outputs.clean_changelog }}
-
-      - name: Deploy
-        run: |
-          npm run deploy
-
-#permissions:
-#  contents: read
-#  pages: write
-#  id-token: write
-#concurrency:
-#  group: "pages"
-#  cancel-in-progress: false
-#  deploy:
-#    environment:
-#      name: github-pages
-#      url: ${{steps.deployment.outputs.page_url}}
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@v3
-#      - name: Install npm
-#        run: npm ci
-#      - name: Build app
-#        run: npm run build
-#      - name: Setup Pages
-#        uses: actions/configure-pages@v3
-#      - name: Upload Artifact
-#        uses: actions/upload-pages-artifact@v2
-#        with:
-#          path: './dist/cicd'
-#      - name: Deploy to GitHub Pages
-#        id: deployment
-#        uses: actions/deploy-pages@v2
+          path: './dist/cicd'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
 
 
