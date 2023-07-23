@@ -32,7 +32,6 @@ jobs:
           folder: dist/cicd
           branch: gh-pages
 
-
 #permissions:
 #  contents: read
 #  pages: write
