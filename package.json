@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build:prod": "ng build --deploy-url https://andrey1821.github.io/cicd/",
+    "build:prod": "ng build --base-href https://andrey1821.github.io/cicd/#",
     "build:stage": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
