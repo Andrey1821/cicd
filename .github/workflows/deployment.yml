@@ -14,8 +14,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
       - name: Install npm
         run: npm ci
+
+      - name: Setup credentials to access private repositories
+        run: |
+         git config --global user.name=Andrey1821
+         git config --global user.email=andreykyk888@gmail.com
+
       - name: Create Release
         uses: actions/create-release@v1
         if: ${{ steps.changelog.outputs.skipped == 'false' }}
