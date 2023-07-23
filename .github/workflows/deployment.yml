@@ -28,11 +28,11 @@ jobs:
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB_ACTION }}
+          token: ${{ secrets.TOKEN_GITHUB_ACTION }}
           folder: dist/cicd
           branch: gh-pages
-          GIT_CONFIG_NAME: Andrey1821
-          GIT_CONFIG_EMAIL: andreykyk888@gmail.com
+          git-config-name: Andrey1821
+          git-config-email: andreykyk888@gmail.com
 
 
 #permissions:
