@@ -23,7 +23,7 @@ jobs:
       - name: Build app
         run: |
           npm ci
-          npm run build
+          ng build --prod --base-href /
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.5
