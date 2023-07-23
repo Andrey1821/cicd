@@ -28,9 +28,12 @@ jobs:
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          token: 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
+          token: ${{ secrets.TOKEN_GITHUB_ACTION }}
           folder: dist/cicd
           branch: gh-pages
+          git-config-name: Andrey1821
+          git-config-email: andreykyk888@gmail.com
+
 
 #permissions:
 #  contents: read
