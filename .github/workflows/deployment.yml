@@ -20,8 +20,8 @@ jobs:
 
       - name: Setup credentials to access private repositories
         run: |
-         git config --global user.name=Andrey1821
-         git config --global user.email=andreykyk888@gmail.com
+         git config --global user.name="Andrey1821"
+         git config --global user.email="andreykyk888@gmail.com"
 
       - name: Create Release
         uses: actions/create-release@v1
