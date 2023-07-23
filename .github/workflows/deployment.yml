@@ -10,18 +10,13 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    concurrency: ci-${{github.ref}}
+#    concurrency: ci-${{github.ref}}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
       - name: Install npm
         run: npm ci
-
-      - name: Setup credentials to access private repositories
-        run: |
-         git config --global user.name Andrey1821
-         git config --global user.email andreykyk888@gmail.com
 
       - name: Create Release
         uses: actions/create-release@v1
@@ -35,6 +30,8 @@ jobs:
 
       - name: Deploy
         run: |
+          git config --global user.name Andrey1821
+          git config --global user.email andreykyk888@gmail.com
           npm run deploy
 
 
