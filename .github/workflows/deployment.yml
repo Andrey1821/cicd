@@ -26,8 +26,9 @@ jobs:
           npm run build
 
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4
+        uses: JamesIves/github-pages-deploy-action@4.1.5
         with:
+          token: ${{ secrets.TOKEN_GITHUB_ACTION }}
           folder: dist/cicd
           branch: gh-pages
 
