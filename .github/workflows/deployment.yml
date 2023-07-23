@@ -3,24 +3,27 @@ on: workflow_dispatch
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    concurrency: ci-${{github.ref}}
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
-      - name: Install npm
-        run: npm ci
-      - name: Create Release
-        uses: actions/create-release@v1
-        if: ${{ steps.changelog.outputs.skipped == 'false' }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB_ACTION }}
+        uses: actions/checkout@v2
+
+      - name: Configure Node
+        uses: actions/setup-node@v1
         with:
-          tag_name: ${{ steps.changelog.outputs.tag }}
-          release_name: ${{ steps.changelog.outputs.tag }}
-          body: ${{ steps.changelog.outputs.clean_changelog }}
+          node-version: '18.17.0'
+
+      - name: Build app
+        run: |
+          npm ci
+          npm run build
 
       - name: Deploy
-        run: |
-          npm run deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist/cicd
+          branch: gh-pages
+
 
 #permissions:
 #  contents: read
@@ -52,3 +55,20 @@ jobs:
 #        uses: actions/deploy-pages@v2
 
 
+#      - name: Checkout
+#        uses: actions/checkout@v3
+#      - name: Install npm
+#        run: npm ci
+#      - name: Create Release
+#        uses: actions/create-release@v1
+#        if: ${{ steps.changelog.outputs.skipped == 'false' }}
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB_ACTION }}
+#        with:
+#          tag_name: ${{ steps.changelog.outputs.tag }}
+#          release_name: ${{ steps.changelog.outputs.tag }}
+#          body: ${{ steps.changelog.outputs.clean_changelog }}
+#
+#      - name: Deploy
+#        run: |
+#          npm run deploy
