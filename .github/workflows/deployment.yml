@@ -31,8 +31,6 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           folder: dist/cicd
           branch: gh-pages
-          git-config-name: Andrey1821
-          git-config-email: andreykyk888@gmail.com
 
 
 #permissions:
