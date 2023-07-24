@@ -12,7 +12,7 @@
     "format": "npx prettier 'src/**/*.{js,jsx,ts,tsx,html}' --write",
     "lint:eslint": "eslint --color --fix -c .eslintrc.json --ext .ts ./src/app",
     "prepare": "husky install",
-    "deploy": "ng deploy --name=Andrey1821 --email=andreykyk888@gmail.com --base-href=/cicd/ --no-silent"
+    "deploy": "ng deploy --name=Andrey1821 --email=andreykyk888@gmail.com --base-href=/cicd/ --no-silent --token"
   },
   "private": true,
   "dependencies": {
