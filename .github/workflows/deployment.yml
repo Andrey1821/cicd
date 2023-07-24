@@ -15,10 +15,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Configure Node
-        uses: actions/setup-node@v1
-        with:
-          node-version: '18.17.0'
+#      - name: Configure Node
+#        uses: actions/setup-node@v1
+#        with:
+#          node-version: '18.17.0'
 
       - name: Build app
         run: |
