@@ -105,3 +105,7 @@ jobs:
 #      - name: Deploy
 #        run: |
 #          npm run deploy
+
+
+# "deploy": "ng deploy --name=Andrey1821 --email=andreykyk888@gmail.com  --repo=https://Andrey1821:$secrets.GITHUB_TOKEN@github.com/Andrey1821/cicd.git --base-href=/cicd/ --no-silent"
+
