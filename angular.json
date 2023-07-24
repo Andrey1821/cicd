@@ -22,6 +22,7 @@
           "options": {
             "outputPath": "dist/cicd",
             "index": "src/index.html",
+            "404": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",

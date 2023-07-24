@@ -25,6 +25,10 @@ jobs:
           npm ci
           npm run build:prod
 
+      - name: Cat Index to 404
+        run: echo > "./dist/cicd/404.html"
+          cat "./dist/cicd/index.html" >> "./dist/cicd/404.html"
+
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.5
         with:
